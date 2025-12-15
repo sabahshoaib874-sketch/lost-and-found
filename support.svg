@@ -1,0 +1,19 @@
+<svg width="80" height="80" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Headset band -->
+  <path d="M30 60 A30 30 0 0 1 90 60" 
+        stroke="#0F4C81" stroke-width="8" fill="none"/>
+
+  <!-- Left ear -->
+  <rect x="20" y="55" width="15" height="35" 
+        rx="8" stroke="#0F4C81" stroke-width="8" fill="none"/>
+
+  <!-- Right ear -->
+  <rect x="85" y="55" width="15" height="35" 
+        rx="8" stroke="#0F4C81" stroke-width="8" fill="none"/>
+
+  <!-- Mic -->
+  <line x1="85" y1="90" x2="72" y2="95" 
+        stroke="#0F4C81" stroke-width="8" stroke-linecap="round"/>
+
+</svg>
