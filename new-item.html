@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل غرض جديد</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+</nav>
+
+<header class="hero small-hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>تسجيل غرض جديد</h1>
+        <p>قم بإضافة غرض جديد للنظام</p>
+    </div>
+</header>
+
+<section class="form-section">
+
+    <div class="glass-form">
+
+        <label>نوع الغرض:</label>
+        <select id="itemType">
+            <option value="مفقود">مفقود</option>
+            <option value="معثور عليه">معثور عليه</option>
+        </select>
+
+        <label>اسم الغرض:</label>
+        <input type="text" id="itemName" placeholder="مثال: محفظة، بطاقة، مفتاح">
+
+        <label>الوصف:</label>
+        <textarea id="itemDesc" placeholder="أدخل وصفاً للغرض..."></textarea>
+
+        <label>المكان:</label>
+        <input type="text" id="itemLocation" placeholder="مثال: مبنى C – بوابة 3">
+
+        <label>التاريخ:</label>
+        <input type="date" id="itemDate">
+
+        <label>رفع صورة (اختياري):</label>
+        <input type="file" id="itemImage" accept="image/*">
+
+        <button class="submit-btn" onclick="saveItem()">حفظ الغرض</button>
+    </div>
+
+</section>
+
+<script>
+function saveItem() {
+    let name = document.getElementById("itemName").value;
+    let type = document.getElementById("itemType").value;
+    let desc = document.getElementById("itemDesc").value;
+    let location = document.getElementById("itemLocation").value;
+    let date = document.getElementById("itemDate").value;
+    let imageFile = document.getElementById("itemImage").files[0];
+
+    if (!name || !desc || !location || !date) {
+        alert("الرجاء تعبئة جميع الحقول.");
+        return;
+    }
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+
+        let newItem = {
+            name: name,
+            type: type,
+            desc: desc,
+            location: location,
+            date: date,
+            image: imageFile ? e.target.result : null
+        };
+
+        let items = JSON.parse(localStorage.getItem("items")) || [];
+        items.push(newItem);
+        localStorage.setItem("items", JSON.stringify(items));
+
+        alert("تم حفظ الغرض بنجاح!");
+        window.location.href = "index.html";
+    };
+
+    if (imageFile) reader.readAsDataURL(imageFile);
+    else {
+        let newItem = {
+            name: name,
+            type: type,
+            desc: desc,
+            location: location,
+            date: date,
+            image: null
+        };
+
+        let items = JSON.parse(localStorage.getItem("items")) || [];
+        items.push(newItem);
+        localStorage.setItem("items", JSON.stringify(items));
+
+        alert("تم حفظ الغرض بنجاح!");
+        window.location.href = "index.html";
+    }
+}
+</script>
+
+</body>
+</html>

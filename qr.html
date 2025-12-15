@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إنشاء QR</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+</nav>
+
+<header class="hero small-hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>إنشاء رمز QR</h1>
+        <p>قم بإنشاء رمز QR يحتوي على معلومات الغرض</p>
+    </div>
+</header>
+
+<section class="form-section">
+
+    <div class="glass-form">
+
+        <label>أدخل النص أو البيانات:</label>
+        <input type="text" id="qrText" placeholder="مثال: رقم بلاغ، اسم غرض، رابط...">
+
+        <button class="submit-btn" onclick="generateQR()">إنشاء QR</button>
+
+        <div id="qrResult" style="text-align:center; margin-top:25px;"></div>
+
+    </div>
+
+</section>
+
+
+<!-- مكتبة QR (مضمنة داخل الكود) -->
+<script>
+/* QR Generator — مكتبة جاهزة */
+class QR {
+    constructor() {
+        this.canvas = document.createElement("canvas");
+        this.ctx = this.canvas.getContext("2d");
+    }
+
+    generate(text) {
+        let url = "https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=" + encodeURIComponent(text);
+        return url;
+    }
+}
+</script>
+
+
+<script>
+function generateQR() {
+    let text = document.getElementById("qrText").value;
+
+    if (!text.trim()) {
+        alert("الرجاء كتابة نص لإنشاء QR.");
+        return;
+    }
+
+    let qr = new QR();
+    let qrURL = qr.generate(text);
+
+    document.getElementById("qrResult").innerHTML = `
+        <img src="${qrURL}" style="width:250px; height:250px; margin-top:20px;">
+        <br><br>
+        <a href="${qrURL}" download="qr.png" class="submit-btn">تحميل QR</a>
+    `;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خدمة مفقودات الكلية التقنية</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<!-- NAV – Ultra Glass with Icons -->
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+       <div class="nav-search-bar">
+       <img src="icons/search.svg" class="nav-search-icon">
+
+      <input type="text" placeholder="ابحث هنا...">
+   
+    </div>
+ 
+  <!-- Notifications Popup -->
+<div id="notif-box" class="notif-box">
+    <div class="notif-header">
+        <h3>التنبيهات</h3>
+        <span id="close-notif">&times;</span>
+    </div>
+
+    <div class="notif-item">
+        <span>🔔</span> تم إضافة غرض جديد في قائمة المفقودات.
+    </div>
+
+    <div class="notif-item">
+        <span>📦</span> تم العثور على غرض مطابق لبلاغك.
+    </div>
+
+    <div class="notif-item">
+        <span>⭐</span> لا توجد تنبيهات جديدة حالياً.
+    </div>
+</div>
+
+
+
+ <div class="nav-icons"> 
+
+   <button class="nav-btn" onclick="location.href='info.html'">
+    <img src="icons/info.svg">
+</button>
+
+<button class="nav-btn" onclick="location.href='help.html'">
+    <img src="icons/help.svg">
+</button>
+
+<button class="nav-btn" id="btn-bell">
+    <img src="icons/bell.svg">
+</button>
+
+
+<button class="nav-btn" id="btn-menu">
+    <img src="icons/menu.svg">
+</button>
+  
+</div>
+
+   </nav>
+
+
+<header class="hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>خدمة مفقودات الكلية التقنية</h1>
+        <p>منصة إلكترونية متطورة للإبلاغ، تسجيل وتتبع المفقودات</p>
+    </div>
+    <div class="scroll-bounce">⟱</div>
+</header>
+
+
+<section class="services-list">
+
+    <a href="new-item.html" class="service-card">
+        <div class="icon-circle"><img src="icons/add.svg"></div>
+        <div class="service-text">
+            <h3>تسجيل غرض جديد</h3>
+            <p>استخدم هذه الخدمة لتسجيل غرض جديد مفقود أو معثور عليه في النظام.</p>
+        </div>
+    </a>
+
+    <a href="qr.html" class="service-card">
+        <div class="icon-circle"><img src="icons/qr.svg"></div>
+        <div class="service-text">
+            <h3>إنشاء QR</h3>
+            <p>إنشاء رمز QR مخصص ليسهل الوصول إلى بيانات الغرض بسرعة.</p>
+        </div>
+    </a>
+
+    <a href="report.html" class="service-card">
+        <div class="icon-circle"><img src="icons/search.svg"></div>
+        <div class="service-text">
+            <h3>الإبلاغ عن غرض مفقود</h3>
+            <p>إرسال بلاغ عن غرض مفقود مع تفاصيل تساعد في العثور عليه.</p>
+        </div>
+    </a>
+
+    <a href="lost-list.html" class="service-card">
+    <div class="icon-circle">
+        <img src="icons/list.svg" alt="list">
+    </div>
+    <div class="service-text">
+        <h3>قائمة المفقودات</h3>
+        <p>عرض جميع الأغراض والبلاغات في النظام.</p>
+    </div>
+</a>
+
+
+    <a href="support.html" class="service-card">
+        <div class="icon-circle"><img src="icons/support.svg"></div>
+        <div class="service-text">
+            <h3>الدعم الفني</h3>
+            <p>تواصل مباشر مع فريق الدعم لحل أي مشكلة تواجهك.</p>
+        </div>
+    </a>
+
+</section>
+<script src="script.js"></script>
+
+
+
+</body>
+</html>

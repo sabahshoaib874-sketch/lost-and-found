@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قائمة المفقودات</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+/* تصميم خاص باللستة */
+.items-container {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item-card {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 18px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.item-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #d0d7e0;
+}
+
+.item-info h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.item-info p {
+    margin: 4px 0;
+    opacity: 0.8;
+}
+
+.search-box {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 18px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(15px);
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+</nav>
+
+<header class="hero small-hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>قائمة المفقودات</h1>
+        <p>جميع الأغراض المسجلة في النظام</p>
+    </div>
+</header>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن غرض...">
+</div>
+
+<section class="items-container" id="itemsContainer"></section>
+
+<script>
+// جلب البيانات
+function loadData() {
+    let items = JSON.parse(localStorage.getItem("items")) || [];
+    let reports = JSON.parse(localStorage.getItem("reports")) || [];
+
+    // دمج القائمتين
+    let merged = [...items, ...reports];
+
+    return merged;
+}
+
+// عرض العناصر
+function displayItems(list) {
+    let container = document.getElementById("itemsContainer");
+    container.innerHTML = "";
+
+    if (list.length === 0) {
+        container.innerHTML = "<p style='text-align:center; opacity:0.7;'>لا توجد نتائج.</p>";
+        return;
+    }
+
+    list.forEach(item => {
+        container.innerHTML += `
+            <div class="item-card">
+                <img src="${item.image ? item.image : 'icons/no-img.png'}">
+                <div class="item-info">
+                    <h3>${item.name}</h3>
+                    <p><strong>الحالة:</strong> ${item.type ? item.type : "بلاغ مفقود"}</p>
+                    <p><strong>الوصف:</strong> ${item.desc}</p>
+                    <p><strong>المكان:</strong> ${item.location}</p>
+                    <p><strong>التاريخ:</strong> ${item.date}</p>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// البحث
+document.getElementById("searchInput").addEventListener("input", function () {
+    let text = this.value.toLowerCase();
+    let data = loadData();
+
+    let filtered = data.filter(item =>
+        item.name.toLowerCase().includes(text) ||
+        item.desc.toLowerCase().includes(text) ||
+        item.location.toLowerCase().includes(text)
+    );
+
+    displayItems(filtered);
+});
+
+// بداية الصفحة
+let allItems = loadData();
+displayItems(allItems);
+</script>
+
+</body>
+</html>

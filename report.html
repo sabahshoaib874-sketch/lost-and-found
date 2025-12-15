@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإبلاغ عن غرض مفقود</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+</nav>
+
+<header class="hero small-hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>الإبلاغ عن غرض مفقود</h1>
+        <p>يرجى إدخال تفاصيل الغرض المفقود</p>
+    </div>
+</header>
+
+<section class="form-section">
+
+    <div class="glass-form">
+
+        <label>اسم الغرض:</label>
+        <input type="text" id="repName" placeholder="مثال: بطاقة جامعية، مفتاح">
+
+        <label>الوصف:</label>
+        <textarea id="repDesc" placeholder="أدخل تفاصيل تساعد في العثور على الغرض..."></textarea>
+
+        <label>آخر مكان شوهد فيه:</label>
+        <input type="text" id="repLocation" placeholder="مثال: مبنى 4 – الممر الثاني">
+
+        <label>التاريخ:</label>
+        <input type="date" id="repDate">
+
+        <label>رفع صورة (اختياري):</label>
+        <input type="file" id="repImage" accept="image/*">
+
+        <button class="submit-btn" onclick="sendReport()">إرسال البلاغ</button>
+
+    </div>
+
+</section>
+
+<script>
+function sendReport() {
+    let name = document.getElementById("repName").value;
+    let desc = document.getElementById("repDesc").value;
+    let loc = document.getElementById("repLocation").value;
+    let date = document.getElementById("repDate").value;
+    let imgFile = document.getElementById("repImage").files[0];
+
+    if (!name || !desc || !loc || !date) {
+        alert("الرجاء تعبئة جميع الحقول.");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        let report = {
+            name: name,
+            desc: desc,
+            location: loc,
+            date: date,
+            image: imgFile ? e.target.result : null
+        };
+
+        let reports = JSON.parse(localStorage.getItem("reports")) || [];
+        reports.push(report);
+        localStorage.setItem("reports", JSON.stringify(reports));
+
+        alert("تم إرسال البلاغ بنجاح!");
+        window.location.href = "index.html";
+    };
+
+    if (imgFile) {
+        reader.readAsDataURL(imgFile);
+    } else {
+        let report = {
+            name: name,
+            desc: desc,
+            location: loc,
+            date: date,
+            image: null
+        };
+
+        let reports = JSON.parse(localStorage.getItem("reports")) || [];
+        reports.push(report);
+        localStorage.setItem("reports", JSON.stringify(reports));
+
+        alert("تم إرسال البلاغ بنجاح!");
+        window.location.href = "index.html";
+    }
+}
+</script>
+
+</body>
+</html>

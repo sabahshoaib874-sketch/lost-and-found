@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدعم الفني</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAV – نفس تصميم الصفحة الرئيسية -->
+<nav class="nav-glass">
+    <img src="logo.png" class="nav-logo">
+
+    <!-- شريط البحث -->
+    <div class="nav-search-bar">
+        <img src="icons/search.svg" class="nav-search-icon">
+        <input type="text" placeholder="ابحث هنا...">
+    </div>
+
+    <!-- صندوق التنبيهات -->
+    <div id="notif-box" class="notif-box">
+        <div class="notif-header">
+            <h3>التنبيهات</h3>
+            <span id="close-notif">&times;</span>
+        </div>
+
+        <div class="notif-item">
+            <span>🔔</span> تم إضافة غرض جديد في قائمة المفقودات.
+        </div>
+
+        <div class="notif-item">
+            <span>📦</span> تم العثور على غرض مطابق لبلاغك.
+        </div>
+
+        <div class="notif-item">
+            <span>⭐</span> لا توجد تنبيهات جديدة حالياً.
+        </div>
+    </div>
+
+    <!-- أيقونات الهيدر -->
+    <div class="nav-icons">
+
+        <button class="nav-btn" onclick="location.href='info.html'">
+            <img src="icons/info.svg">
+        </button>
+
+        <button class="nav-btn" onclick="location.href='help.html'">
+            <img src="icons/help.svg">
+        </button>
+
+        <button class="nav-btn" id="btn-bell">
+            <img src="icons/bell.svg">
+        </button>
+
+        <button class="nav-btn" id="btn-menu">
+            <img src="icons/menu.svg">
+        </button>
+
+    </div>
+</nav>
+
+<!-- القائمة الجانبية -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h3>القائمة</h3>
+        <span id="close-menu">&times;</span>
+    </div>
+
+    <a href="index.html">الرئيسية</a>
+    <a href="new-item.html">تسجيل غرض جديد</a>
+    <a href="qr.html">إنشاء QR</a>
+    <a href="report.html">الإبلاغ عن غرض</a>
+    <a href="lost-list.html">قائمة المفقودات</a>
+    <a href="support.html">الدعم الفني</a>
+</div>
+
+
+<header class="hero small-hero">
+    <div class="hero-layer"></div>
+    <div class="hero-content">
+        <h1>الدعم الفني</h1>
+        <p>نحن هنا لمساعدتك! ارسل مشكلتك أو استفسارك.</p>
+    </div>
+</header>
+
+
+<section class="form-section">
+
+    <div class="glass-form">
+
+        <label>الاسم:</label>
+        <input type="text" id="supName" placeholder="اكتب اسمك الكامل">
+
+        <label>البريد الإلكتروني:</label>
+        <input type="email" id="supEmail" placeholder="example@email.com">
+
+        <label>الموضوع:</label>
+        <input type="text" id="supSubject" placeholder="موضوع الرسالة">
+
+        <label>الرسالة:</label>
+        <textarea id="supMessage" placeholder="اكتب رسالتك هنا..."></textarea>
+
+        <button class="submit-btn" onclick="sendSupport()">إرسال الرسالة</button>
+
+        <hr style="margin: 30px 0; opacity:0.4;">
+
+        <h3 style="text-align:center;">طرق تواصل أخرى</h3>
+
+        <a href="https://wa.me/966500000000" class="submit-btn" style="margin-top:15px; display:block; text-align:center;">
+            تواصل عبر الواتساب
+        </a>
+
+        <a href="mailto:help@example.com" class="submit-btn" style="margin-top:10px; display:block; text-align:center;">
+            إرسال بريد إلكتروني
+        </a>
+
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
+
+<script>
+function sendSupport() {
+    let name = document.getElementById("supName").value;
+    let email = document.getElementById("supEmail").value;
+    let subject = document.getElementById("supSubject").value;
+    let message = document.getElementById("supMessage").value;
+
+    if (!name || !email || !subject || !message) {
+        alert("الرجاء تعبئة جميع الحقول.");
+        return;
+    }
+
+    let supportMsg = {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+        date: new Date().toLocaleString()
+    };
+
+    let messages = JSON.parse(localStorage.getItem("supportMessages")) || [];
+    messages.push(supportMsg);
+    localStorage.setItem("supportMessages", JSON.stringify(messages));
+
+    alert("تم إرسال الرسالة بنجاح! سنعاود التواصل معك قريباً.");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
